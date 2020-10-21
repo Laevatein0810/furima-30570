@@ -1,11 +1,16 @@
 # テーブル設計
 
 ## usersテーブル
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| name     | string | null: false |
-| email    | string | null: false |
-| password | string | null: false |
+| Column                  | Type   | Options     |
+| ----------------------- | ------ | ----------- |
+| nickname                | string | null: false |
+| last name               | string | null: false |
+| first name              | string | null: false |
+| frigana last            | string | null: false |
+| frigana first           | string | null: false |
+| birthday                | string | null: false |
+| email                   | string | null: false |
+| encrypted_password      | string | null: false |
 
 ### Association
 
@@ -13,14 +18,17 @@
 - has_many :buyers
 
 ## itemsテーブル
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| name      | string     | null: false                    |
-| image     | string     | null: false                    |
-| category  | string     | null: false                    |
-| price     | string     | null: false                    |
-| user      | references | null: false, foreign_key: true |
-
+| Column          | Type        | Options                        |
+| --------------- | ----------- | ------------------------------ |
+| name            | string      | null: false                    |
+| description     | string      | null: false                    |
+| delivery charge | string      | null: false                    |
+| delivery source | string      | null: false                    |
+| shipping days   | string      | null: false                    |
+| category_id     | integer     | null: false                    |
+| price           | integer     | null: false                    |
+| user            | references  | null: false, foreign_key: true |
+ 
 ### Association
 - has_many :users
 - has_many :buyers
@@ -36,9 +44,11 @@
 - belongs_to :items
 
 ## buyersテーブル
-| Column | Type       | Options                       |
-| ------ | ---------- | ----------------------------- |
-| name   | references | null: false, foreign_key: true|
+| Column  | Type       | Options                       |
+| ------- | ---------- | ----------------------------- |
+| name    | references | null: false, foreign_key: true|
+| user_id | string     | null: false                   |
+| item_id | string     | null: false                   |
 
 ### Association
 
@@ -48,7 +58,11 @@
 ## deliveryテーブル
 | Column         | Type   | Options     |
 | -------------- | ------ | ----------- |
-| street address | string | null: false |
+| postal code    | string | null: false |
+| prefectures    | string | null: false |
+| cities         | string | null: false |
+| address        | string | null: false |
+| phone number   | string | null: false |
 
 ### Association
 
