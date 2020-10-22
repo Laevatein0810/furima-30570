@@ -21,9 +21,10 @@
 | Column             | Type         | Options                        |
 | ------------------ | ------------ | ------------------------------ |
 | name               | string       | null: false                    |
-| description_id     | text         | null: false                    |
+| description        | text         | null: false                    |
+| status_id          | integer      | null: false                    |
 | delivery_charge_id | integer      | null: false                    |
-| delivery_source_id | integer      | null: false                    |
+| prefectures_id     | integer      | null: false                    |
 | shipping_days_id   | integer      | null: false                    |
 | category_id        | integer      | null: false                    |
 | price              | integer      | null: false                    |
@@ -44,10 +45,10 @@
 - belongs_to :items
 
 ## buyersテーブル
-| Column  | Type       | Options                       |
-| ------- | ---------- | ----------------------------- |
-| user_id | string     | null: false, foreign_key: true|
-| item_id | string     | null: false, foreign_key: true|
+| Column  | Type    | Options                       |
+| ------- | ------- | ----------------------------- |
+| user_id | integer | null: false, foreign_key: true|
+| item_id | integer | null: false, foreign_key: true|
 
 ### Association
 
