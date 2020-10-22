@@ -8,7 +8,7 @@
 | first_name              | string | null: false |
 | frigana_last            | string | null: false |
 | frigana_first           | string | null: false |
-| birthday                | string | null: false |
+| birthday                | date   | null: false |
 | email                   | string | null: false |
 | encrypted_password      | string | null: false |
 
@@ -18,16 +18,16 @@
 - has_many :buyers
 
 ## itemsテーブル
-| Column          | Type         | Options                        |
-| --------------- | ------------ | ------------------------------ |
-| name            | string       | null: false                    |
-| description     | integer      | null: false                    |
-| delivery_charge | integer      | null: false                    |
-| delivery_source | integer      | null: false                    |
-| shipping_days   | integer      | null: false                    |
-| category_id     | integer      | null: false                    |
-| price           | integer      | null: false                    |
-| user            | references   | null: false, foreign_key: true |
+| Column             | Type         | Options                        |
+| ------------------ | ------------ | ------------------------------ |
+| name               | string       | null: false                    |
+| description_id     | text         | null: false                    |
+| delivery_charge_id | integer      | null: false                    |
+| delivery_source_id | integer      | null: false                    |
+| shipping_days_id   | integer      | null: false                    |
+| category_id        | integer      | null: false                    |
+| price              | integer      | null: false                    |
+| user               | references   | null: false, foreign_key: true |
  
 ### Association
 - belongs_to :users
