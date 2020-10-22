@@ -57,16 +57,15 @@
 - belongs_to :user
 
 ## deliveryテーブル
-| Column         | Type    | Options     |
-| -------------- | ------- | ----------- |
-| postal_code    | string  | null: false |
-| prefectures_id | integer | null: false |
-| cities         | string  | null: false |
-| address        | string  | null: false |
-| building       | string  |             |
-| phone_number   | string  | null: false |
-| user_id        | string  | null: false |
-| item_id        | string  | null: false |
+| Column         | Type         | Options                        |
+| -------------- | ------------ | ------------------------------ |
+| postal_code    | string       | null: false                    |
+| prefectures_id | integer      | null: false                    |
+| cities         | string       | null: false                    |
+| address        | string       | null: false                    |
+| building       | string       |                                |
+| phone_number   | string       | null: false                    |
+| buyer          | references   | null: false, foreign_key: true |
 
 ### Association
 
