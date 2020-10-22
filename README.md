@@ -32,7 +32,7 @@
  
 ### Association
 - belongs_to :users
-- has_many :buyers
+- has_one :buyers
 
 ## commentsテーブル
 | Column | Type       | Options     |
@@ -63,7 +63,7 @@
 | prefectures_id | integer | null: false, foreign_key: true |
 | cities         | string  | null: false, foreign_key: true |
 | address        | string  | null: false, foreign_key: true |
-| building       | string  | null: false, foreign_key: true |
+| building       | string  | foreign_key: true              |
 | phone_number   | string  | null: false, foreign_key: true |
 
 ### Association
