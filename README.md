@@ -4,10 +4,10 @@
 | Column                  | Type   | Options     |
 | ----------------------- | ------ | ----------- |
 | nickname                | string | null: false |
-| last name               | string | null: false |
-| first name              | string | null: false |
-| frigana last            | string | null: false |
-| frigana first           | string | null: false |
+| last_name               | string | null: false |
+| first_name              | string | null: false |
+| frigana_last            | string | null: false |
+| frigana_first           | string | null: false |
 | birthday                | string | null: false |
 | email                   | string | null: false |
 | encrypted_password      | string | null: false |
@@ -18,19 +18,19 @@
 - has_many :buyers
 
 ## itemsテーブル
-| Column          | Type        | Options                        |
-| --------------- | ----------- | ------------------------------ |
-| name            | string      | null: false                    |
-| description     | string      | null: false                    |
-| delivery charge | string      | null: false                    |
-| delivery source | string      | null: false                    |
-| shipping days   | string      | null: false                    |
-| category_id     | integer     | null: false                    |
-| price           | integer     | null: false                    |
-| user            | references  | null: false, foreign_key: true |
+| Column          | Type         | Options                        |
+| --------------- | ------------ | ------------------------------ |
+| name            | string       | null: false                    |
+| description     | integer      | null: false                    |
+| delivery_charge | integer      | null: false                    |
+| delivery_source | integer      | null: false                    |
+| shipping_days   | integer      | null: false                    |
+| category_id     | integer      | null: false                    |
+| price           | integer      | null: false                    |
+| user            | references   | null: false, foreign_key: true |
  
 ### Association
-- has_many :users
+- belongs_to :users
 - has_many :buyers
 
 ## commentsテーブル
@@ -46,24 +46,25 @@
 ## buyersテーブル
 | Column  | Type       | Options                       |
 | ------- | ---------- | ----------------------------- |
-| name    | references | null: false, foreign_key: true|
-| user_id | string     | null: false                   |
-| item_id | string     | null: false                   |
+| user_id | string     | null: false, foreign_key: true|
+| item_id | string     | null: false, foreign_key: true|
 
 ### Association
 
 - has_one :delivery
 - has_many :items
+- belongs_to :users
 
 ## deliveryテーブル
-| Column         | Type   | Options     |
-| -------------- | ------ | ----------- |
-| postal code    | string | null: false |
-| prefectures    | string | null: false |
-| cities         | string | null: false |
-| address        | string | null: false |
-| phone number   | string | null: false |
+| Column         | Type    | Options                        |
+| -------------- | ------- | ------------------------------ |
+| postal_code    | string  | null: false, foreign_key: true |
+| prefectures    | integer | null: false, foreign_key: true |
+| cities         | string  | null: false, foreign_key: true |
+| address        | string  | null: false, foreign_key: true |
+| building       | string  | null: false, foreign_key: true |
+| phone_number   | string  | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :buyers
+- belongs_to :buyers
