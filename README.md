@@ -31,8 +31,8 @@
 | user               | references   | null: false, foreign_key: true |
  
 ### Association
-- belongs_to :users
-- has_one :buyers
+- belongs_to :user
+- has_one :buyer
 
 ## commentsテーブル
 | Column | Type       | Options     |
@@ -41,8 +41,8 @@
 | text   | text       | null: false |
 
 ### Association
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
 
 ## buyersテーブル
 | Column  | Type    | Options                       |
@@ -53,19 +53,21 @@
 ### Association
 
 - has_one :delivery
-- has_many :items
-- belongs_to :users
+- belongs_to :item
+- belongs_to :user
 
 ## deliveryテーブル
-| Column         | Type    | Options                        |
-| -------------- | ------- | ------------------------------ |
-| postal_code    | string  | null: false, foreign_key: true |
-| prefectures_id | integer | null: false, foreign_key: true |
-| cities         | string  | null: false, foreign_key: true |
-| address        | string  | null: false, foreign_key: true |
-| building       | string  | foreign_key: true              |
-| phone_number   | string  | null: false, foreign_key: true |
+| Column         | Type    | Options     |
+| -------------- | ------- | ----------- |
+| postal_code    | string  | null: false |
+| prefectures_id | integer | null: false |
+| cities         | string  | null: false |
+| address        | string  | null: false |
+| building       | string  |             |
+| phone_number   | string  | null: false |
+| user_id        | string  | null: false |
+| item_id        | string  | null: false |
 
 ### Association
 
-- belongs_to :buyers
+- belongs_to :buyer
