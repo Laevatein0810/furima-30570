@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe '新規登録' do
-    context 'ユーザー情報' do
+  describe 'ユーザー新規登録' do
+    context '新規登録がうまくいかない' do
       it "nicknameが空では登録できない" do
         user = FactoryBot.build(:user)
         user.nickname = ""
@@ -38,9 +38,17 @@ RSpec.describe User, type: :model do
         user.valid?
         expect(user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
-      it "passwordは半角英数混合での入力で無いと登録できない" do
+      it "passwordは半角数字のみでは登録できない" do
+        user = FactoryBot.build(:user)
+        user.password = "000000"
+        user.password_confirmation = "000000"
+        user.valid?
+        expect(user.errors.full_messages).to include("Password cannot be registered unless it is a mixture of half-width alphanumeric characters.")
+      end
+      it "passwordは半角英字のみでは登録できない" do
         user = FactoryBot.build(:user)
         user.password = "aaaaaa"
+        user.password_confirmation = "aaaaaa"
         user.valid?
         expect(user.errors.full_messages).to include("Password cannot be registered unless it is a mixture of half-width alphanumeric characters.")
       end
@@ -56,8 +64,6 @@ RSpec.describe User, type: :model do
         user.valid?
         expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-    end
-    context '本人情報確認' do
       it "ユーザー本名は、last_nameが空欄だと登録できない" do
         user = FactoryBot.build(:user)
         user.last_name = ""
@@ -111,6 +117,12 @@ RSpec.describe User, type: :model do
         user.birthday = ""
         user.valid?
         expect(user.errors.full_messages).to include("Birthday can't be blank")
+      end
+    end
+    context '新規登録がうまくいく' do
+      it '全ての値が正常に存在する場合、登録できる' do
+        user = FactoryBot.build(:user)
+        expect(user).to be_valid
       end
     end
   end

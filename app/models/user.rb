@@ -4,13 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :nickname, presence: true 
-  validates :email, presence: true, uniqueness: { case_sensitive: true }
-  validates :password, presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: 'cannot be registered unless it is a mixture of half-width alphanumeric characters.'}
-  validates :password_confirmation, presence: true
-  validates :last_name, presence: true, format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/, message:'cannot be registered without full-width input.'}
-  validates :first_name, presence: true, format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/, message:'cannot be registered without full-width input.'}
-  validates :frigana_last, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'cannot be registered unless last_name is entered in double-byte katakana.'}
-  validates :frigana_first, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'cannot be registered unless first_name is entered in double-byte katakana.'}
-  validates :birthday, presence: true
+  with_options presence: true do
+    validates :nickname
+    validates :email, uniqueness: { case_sensitive: true }
+    validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: 'cannot be registered unless it is a mixture of half-width alphanumeric characters.'}
+    validates :password_confirmation
+    validates :last_name, format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/, message:'cannot be registered without full-width input.'}
+    validates :first_name, format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/, message:'cannot be registered without full-width input.'}
+    validates :frigana_last, format: { with: /\A[ァ-ヶー－]+\z/, message: 'cannot be registered unless last_name is entered in double-byte katakana.'}
+    validates :frigana_first, format: { with: /\A[ァ-ヶー－]+\z/, message: 'cannot be registered unless first_name is entered in double-byte katakana.'}
+    validates :birthday
+  end
 end
