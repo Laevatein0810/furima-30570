@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
         user = FactoryBot.create(:user, email: 'aaa@gmail.com')
         another_user = FactoryBot.build(:user, email: 'aaa@gmail.com')
         another_user.valid?
-        expect(user.errors.full_messages).to include("Email has already been taken")
+        expect(another_user.errors.full_messages).to include("Email has already been taken")
       end
       it "emailは、@を含まないと登録できない" do
         user = User.new(nickname: "aaa", email: "aaagmail.com", password: "aaa000", password_confirmation: "aaa000")
@@ -80,7 +80,7 @@ RSpec.describe User, type: :model do
         user = FactoryBot.build(:user)
         user.first_name = "aiueo"
         user.valid?
-        expect(user.errors.full_messages).to include("First name cannotn be registered without full-width input.")
+        expect(user.errors.full_messages).to include("First name cannot be registered without full-width input.")
       end
       it "ユーザー本名のフリガナは、last_nameで空欄だと登録できない" do
         user = FactoryBot.build(:user)
@@ -88,11 +88,23 @@ RSpec.describe User, type: :model do
         user.valid?
         expect(user.errors.full_messages).to include("Frigana last can't be blank")
       end
-      it "ユーザー本名のフリガナは、first_nameで空欄だと登録できない" do
+      it "ユーザー本名のフリガナは、first_nameが空欄だと登録できない" do
         user = FactoryBot.build(:user)
         user.frigana_first = ""
         user.valid?
         expect(user.errors.full_messages).to include("Frigana first can't be blank")
+      end
+      it "ユーザー本名のフリガナは、last_nameで全角カタカナでの入力がないと登録できない" do
+        user = FactoryBot.build(:user)
+        user.frigana_last = "aiueo"
+        user.valid?
+        expect(user.errors.full_messages).to include("Frigana last cannot be registered unless last_name is entered in double-byte katakana.")
+      end
+      it "ユーザー本名のフリガナは、first_nameで全角カタカナでの入力がないと登録できない" do
+        user = FactoryBot.build(:user)
+        user.frigana_first = "aiueo"
+        user.valid?
+        expect(user.errors.full_messages).to include("Frigana first cannot be registered unless first_name is entered in double-byte katakana.")
       end
       it "生年月日が未記入だと登録できない" do
         user = FactoryBot.build(:user)

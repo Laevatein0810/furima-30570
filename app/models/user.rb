@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true
   validates :last_name, presence: true, format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/, message:'cannot be registered without full-width input.'}
   validates :first_name, presence: true, format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/, message:'cannot be registered without full-width input.'}
-  validates :frigana_last, presence: true
-  validates :frigana_first, presence: true
+  validates :frigana_last, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'cannot be registered unless last_name is entered in double-byte katakana.'}
+  validates :frigana_first, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'cannot be registered unless first_name is entered in double-byte katakana.'}
   validates :birthday, presence: true
 end
