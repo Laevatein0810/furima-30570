@@ -5,6 +5,12 @@ RSpec.describe Item, type: :model do
   end
 
   describe '商品出品機能' do
+    context '商品が出品できる時' do
+      it '全ての値が正常に存在する場合、出品できる' do
+        @item = FactoryBot.build(:user)
+        expect(@item).to be_valid
+      end
+    end
     context '出品ができない時' do
       it "nameが空欄の時、出品できない" do
         @item.name = ""
