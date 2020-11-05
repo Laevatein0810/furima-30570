@@ -5,8 +5,5 @@ Rails.application.routes.draw do
 
     #resources :comments, only: :create
   resources :items do
-    #collection do
-      #get 'new'
-    #end
   end
 end

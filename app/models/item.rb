@@ -2,6 +2,16 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
+  belongs_to :user
+  has_one :buyer
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :shipping_day
+  belongs_to_active_hash :status
+  belongs_to_active_hash :category
+  belongs_to_active_hash :prefecture
+  belongs_to_active_hash :delivery_charge
+
   with_options presence: true do
     validates :image
     validates :name
@@ -11,7 +21,7 @@ class Item < ApplicationRecord
   with_options numericality: { other_than: 1 } do
     validates :status_id
     validates :delivery_charge_id
-    validates :prefectures_id
-    validates :shipping_days_id
+    validates :prefecture_id
+    validates :shipping_day_id
   end
 end
