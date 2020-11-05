@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
         redirect_to root_path
       end
       unless user_signed_in? && current_user.id == @item.user.id
-        render :new
+        ridirect_to root_path
       end
   end
 
