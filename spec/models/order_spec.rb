@@ -26,6 +26,12 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("Postal code can't be blank")
       end
 
+      it "postal_codeは「-」が無いと購入できない" do
+        @order.postal_code = "1234567"
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Postal code is invalid")
+      end
+
       it "cityが空欄では購入できない" do
         @order.city = nil
         @order.valid?
@@ -44,10 +50,21 @@ RSpec.describe Order, type: :model do
         expect(@order.errors.full_messages).to include("Phone number can't be blank")
       end
 
+      it "phone_numberが12桁以上では購入できない" do
+        @order.phone_number = "090123456789"
+        @order.valid?
+      end
+
       it "prefectureが空欄では購入できない" do
         @order.prefecture_id = nil
         @order.valid?
         expect(@order.errors.full_messages).to include("Prefecture is not a number")
+      end
+
+      it "prefectureが「---」では購入できない" do
+        @order.prefecture_id = "1"
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Prefecture must be other than 1")
       end
     end
   end
