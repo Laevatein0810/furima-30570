@@ -1,9 +1,8 @@
-class Order < ApplicationRecord
+class Order
   include ActiveModel::Model
-  attr_accessor :token, :price
+  attr_accessor :token, :price, :postal_code, :prefecture_id, :city, :address, :building, :phone_number, :user_id, :item_id
 
   with_options presence: true do
-    validates :price
     validates :token
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
     validates :city
