@@ -5,5 +5,6 @@ Rails.application.routes.draw do
 
     #resources :comments, only: :create
   resources :items do
+    resources :orders,only:[:create, :index]
   end
 end
