@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
 
   def index
     return redirect_to root_path if user_signed_in? && current_user.id == @item.user_id || @item.buyer != nil
+    @order = UserDonation.new(order_params)
   end
 
   def create
