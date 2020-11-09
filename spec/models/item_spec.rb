@@ -32,15 +32,15 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery charge must be other than 1")
       end
-      it "prefectures_idが「---」の時、出品できない" do
-        @item.prefectures_id = 1
+      it "prefecture_idが「---」の時、出品できない" do
+        @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefectures must be other than 1")
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
       end
-      it "shipping_days_idが「---」の時、出品できない" do
-        @item.shipping_days_id = 1
+      it "shipping_day_idが「---」の時、出品できない" do
+        @item.shipping_day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping days must be other than 1")
+        expect(@item.errors.full_messages).to include("Shipping day must be other than 1")
       end
       it "priceが空欄の時、出品できない" do
         @item.price = ""
@@ -61,6 +61,11 @@ RSpec.describe Item, type: :model do
         @item.price = "３００"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Half-width number")
+      end
+      it "categoryが「---」の場合、出品できない" do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
     end
   end

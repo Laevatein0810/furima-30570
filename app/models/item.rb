@@ -23,5 +23,6 @@ class Item < ApplicationRecord
     validates :delivery_charge_id
     validates :prefecture_id
     validates :shipping_day_id
+    validates :category_id
   end
 end
